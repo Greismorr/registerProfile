@@ -1,4 +1,4 @@
-import 'Profile.dart';
+import 'profile.dart';
 import 'dart:io';
 
 void main() {
@@ -14,8 +14,18 @@ void main() {
   print("\nEnter your Sex (Male or Female):");
   String currentProfileSex = stdin.readLineSync();
 
-  Profile currentProfile = new Profile(currentProfileName, currentProfileCpf,
-      currentProfileBirthday, currentProfileSex);
+  print("\nEnter your Message (or just press enter):");
+  String currentMessage = stdin.readLineSync();
 
+  Profile currentProfile = new Profile(currentProfileName, currentProfileCpf,
+      currentProfileBirthday, currentProfileSex,
+      message: currentMessage);
+
+  //The printProfile is called after dirContents, yet dirContents input appears after. That's how async works.
+  currentProfile.dirContents();
   currentProfile.printProfile();
+  currentProfile.saveProfile();
+
+  print("\n\nEnter name of the Profile to be read:");
+  currentProfile.printProfileAsJson(name: stdin.readLineSync());
 }
