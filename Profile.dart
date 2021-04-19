@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'dart:convert';
-
 import 'dart:io';
 
 class Profile {
@@ -114,8 +113,8 @@ class Profile {
     }
   }
 
-  void saveProfile() {
-    new File("Profiles/${this.name}.txt")
+  Future<File> saveProfile() async {
+    return File("Profiles/${this.name}.txt")
         .create(recursive: true)
         .then((File file) => file.writeAsString(jsonEncode(this.toJson())));
   }
